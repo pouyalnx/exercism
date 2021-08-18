@@ -22,36 +22,3 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
-
-num="$1"
-resp=
-
-t=$((num%3))
-if [ $t -eq 0 ]
-then
-	resp=$resp"Pling"
-fi
-t=$((num%5))
-if [ $t -eq 0 ]
-then
-        resp=$resp"Plang"
-fi
-t=$((num%7))
-if [ $t -eq 0 ]
-then
-        resp=$resp"Plong"
-fi
-
-if [ -z "$resp" ]
-then
-	resp=$num
-fi
-
-echo $resp
-
-exit 0
-
-
-
-
-

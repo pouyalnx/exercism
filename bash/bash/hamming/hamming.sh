@@ -23,35 +23,50 @@
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
 
-num="$1"
-resp=
+l1="$1"
+l2="$2"
 
-t=$((num%3))
-if [ $t -eq 0 ]
+ll1=${#l1}
+ll2=${#l2}
+cnt=0
+
+if [ $# -ne 2 ]
 then
-	resp=$resp"Pling"
-fi
-t=$((num%5))
-if [ $t -eq 0 ]
-then
-        resp=$resp"Plang"
-fi
-t=$((num%7))
-if [ $t -eq 0 ]
-then
-        resp=$resp"Plong"
+        echo "Usage: hamming.sh <string1> <string2>"
+        exit 1
 fi
 
-if [ -z "$resp" ]
+
+
+if [ $ll1 -ne $ll2 ]
 then
-	resp=$num
+	echo "left and right strands must be of equal length" 
+	exit 1
 fi
 
-echo $resp
 
+if [ $# -ne 2 ]
+then
+	echo "Usage: hamming.sh <string1> <string2>"
+	exit 1
+fi
+
+
+for i in `seq 1 $ll1`
+do
+al1=`echo "$l1" | head -c $i | tail -c1`
+al2=`echo "$l2" | head -c $i | tail -c1`
+
+if [  $al1 != $al2 ]
+then
+	let "cnt += 1"
+fi
+
+
+done
+
+
+
+echo "$cnt"
 exit 0
-
-
-
-
 
