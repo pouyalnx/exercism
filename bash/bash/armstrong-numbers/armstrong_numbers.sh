@@ -22,3 +22,23 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
+
+num=${1:-0}
+sum=0
+n=${#num}
+for i in `seq 1 ${#num}`
+do
+	digit=`echo -n $num | tail -c $i | head -c1`
+	#echo $digit $i $sum
+	sum=$((sum + digit**n))
+done
+
+
+if [ $sum -eq $num ]
+then
+	echo "true"
+else
+	echo "false"
+fi
+exit 0
+
