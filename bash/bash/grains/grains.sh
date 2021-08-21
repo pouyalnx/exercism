@@ -22,33 +22,3 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
-
-
-data=`echo "$1" | tr 'A-Z' 'a-z' | tr -d 0-9 | tr -d \" | tr -d _ | tr -d , | tr -d . | tr -d - | tr -d ' '`
-
-
-#test -z `echo -n "$data" | tr -d a-z`
-
-#if [ $? -ne 0 ]
-#then
-#	echo "false"
-#	exit 0
-#fi
-
-cnt=$(for i in `seq 1 ${#data}`
-do
-	digit=`echo $data | head -c $i | tail -c 1`
-	echo $digit
-done | sort | uniq | wc -l )
-
-
-
-if [ $cnt -eq 26 ]
-then
-	echo "true"
-else
-	echo "false"
-fi
-
-exit 0
-

@@ -22,33 +22,29 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
+tb="
+letter                           value\n
+A,E,I,O,U,L,N,R,S,T       1\n
+D,G                               2\n
+B,C,M,P                         3\n
+F,H,V,W,Y                      4\n
+K                                  5\n
+J,X                               8\n
+Q,Z                               10
+"
 
-
-data=`echo "$1" | tr 'A-Z' 'a-z' | tr -d 0-9 | tr -d \" | tr -d _ | tr -d , | tr -d . | tr -d - | tr -d ' '`
-
-
-#test -z `echo -n "$data" | tr -d a-z`
-
-#if [ $? -ne 0 ]
-#then
-#	echo "false"
-#	exit 0
-#fi
-
-cnt=$(for i in `seq 1 ${#data}`
+inp=`echo -n "$1" | tr a-z A-Z`
+sum=0
+for i in `seq 1 ${#inp}`
 do
-	digit=`echo $data | head -c $i | tail -c 1`
-	echo $digit
-done | sort | uniq | wc -l )
+	digit=`echo -n $inp | head -c $i | tail -c 1` 
+	#echo $digit
+	score=`echo -e $tb | grep $digit | cut -d ' ' -f 3`
+	#echo $score
+	score=${score:-0}
+	sum=$((sum+score))
+done
 
 
-
-if [ $cnt -eq 26 ]
-then
-	echo "true"
-else
-	echo "false"
-fi
-
+echo $sum
 exit 0
-
