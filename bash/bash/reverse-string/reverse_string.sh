@@ -23,20 +23,10 @@
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
 
+for i in `seq 1 ${#1}`
+do
+	echo -n "$1" | tail -c $i | head -c 1	
+done
 
-if [ "$1" == "total" ]
-then
-	python -c "print(sum([2**x for x in range(64)]))"
-	exit 0
-fi
-
-num=${1-:0}
-
-if [ $num -gt 64 -o $num -le 0 ]
-then
-	echo "Error: invalid input"
-	exit 1
-fi
-
-python -c "print(2**($num-1))"
+echo
 exit 0

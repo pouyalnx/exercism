@@ -23,20 +23,34 @@
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
 
-
-if [ "$1" == "total" ]
+if [ $# -ne 2 ] || [ ! -z`echo -n "$1" | tr -d 0-9` ]
 then
-	python -c "print(sum([2**x for x in range(64)]))"
-	exit 0
-fi
-
-num=${1-:0}
-
-if [ $num -gt 64 -o $num -le 0 ]
-then
-	echo "Error: invalid input"
+	echo "Usage: leap.sh <year>"
 	exit 1
 fi
 
-python -c "print(2**($num-1))"
+
+
+val=$1
+
+[ $((val%4)) -eq 0 ]
+c1=$?
+
+[ $((val%100)) -eq 0 ]
+c2=$?
+
+[ $((val%400)) -eq 0 ]
+c3=$?
+
+
+if [ $c1 -eq 0 ] && [ $c2 -eq 1 ] && [ $c3 -eq 1 ]
+then
+	echo "true"
+	exit 0
+fi
+
+
+echo "false"
 exit 0
+
+

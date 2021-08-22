@@ -22,21 +22,29 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
+n=$2
+
+s1=0
+s2=0
+
+for i in `seq 1 $n`
+do
+	s1=$((s1+i))
+	s2=$((s2+i*i))	
+done
+
+s1=$((s1*s1))
 
 
-if [ "$1" == "total" ]
+if [ "$1" == "square_of_sum" ]
 then
-	python -c "print(sum([2**x for x in range(64)]))"
-	exit 0
+	echo $((s1))
+elif [ "$1" == "sum_of_squares" ]
+then
+	echo $((s2))
+else
+	echo $((s1-s2))
+
 fi
 
-num=${1-:0}
-
-if [ $num -gt 64 -o $num -le 0 ]
-then
-	echo "Error: invalid input"
-	exit 1
-fi
-
-python -c "print(2**($num-1))"
 exit 0
