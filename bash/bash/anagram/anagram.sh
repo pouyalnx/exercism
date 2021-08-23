@@ -23,37 +23,18 @@
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
 
-
-val=`echo -n "$1" | tr -d 0-9` 
-
-if [ $# -ne 1 ] || [ "$val" != "" ]
-then
-	echo "Usage: leap.sh <year>"
-	exit 1
-fi
-
-
-
-val=$1
-
-[ $((val%4)) -eq 0 ]
-c1=$?
-
-[ $((val%100)) -eq 0 ]
-c2=$?
-
-[ $((val%400)) -eq 0 ]
-c3=$?
-
-
-if [ $c1 -eq 0 ] && [ $c2 -eq 1 ] || [ $c3 -eq 0 ]
-then
-	echo "true"
-	exit 0
-fi
-
-
-echo "false"
+prA=`echo -n $1 | tr A-Z a-z`
+key=`python -c "print(sorted(list(\"$prA\")))"`
+frst=""
+for word in $2
+do
+	pr=`echo -n $word | tr A-Z a-z`
+	key_pat=`python -c "print(sorted(list(\"$pr\")))"`
+	if [ "$key" == "$key_pat" ] && [ "$prA" != "$pr" ]
+	then
+		echo -n "${frst}${word}"
+		frst=" "
+	fi
+done
+echo
 exit 0
-
-

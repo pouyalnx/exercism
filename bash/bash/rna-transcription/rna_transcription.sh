@@ -23,37 +23,25 @@
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
 
-
-val=`echo -n "$1" | tr -d 0-9` 
-
-if [ $# -ne 1 ] || [ "$val" != "" ]
+check=`echo -n $1 | tr -d A | tr -d T | tr -d C | tr -d G`
+if [ "$check" != "" ]
 then
-	echo "Usage: leap.sh <year>"
+	echo "Invalid nucleotide detected."
 	exit 1
 fi
 
 
 
-val=$1
+for i in `seq 1 ${#1}`
+do
+	digit=`echo -n $1 | head -c $i | tail -c1`
+	case $digit in
+		G ) echo -n "C" ;;
+		C ) echo -n "G" ;;
+		T ) echo -n "A" ;;
+		A ) echo -n "U" ;;
+	esac
+done
 
-[ $((val%4)) -eq 0 ]
-c1=$?
-
-[ $((val%100)) -eq 0 ]
-c2=$?
-
-[ $((val%400)) -eq 0 ]
-c3=$?
-
-
-if [ $c1 -eq 0 ] && [ $c2 -eq 1 ] || [ $c3 -eq 0 ]
-then
-	echo "true"
-	exit 0
-fi
-
-
-echo "false"
+echo
 exit 0
-
-

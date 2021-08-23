@@ -23,37 +23,29 @@
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
 
+n=$1
+step=0
 
-val=`echo -n "$1" | tr -d 0-9` 
 
-if [ $# -ne 1 ] || [ "$val" != "" ]
+if [ $n -le 0 ]
 then
-	echo "Usage: leap.sh <year>"
+	echo "Error: Only positive numbers are allowed"
 	exit 1
 fi
 
 
-
-val=$1
-
-[ $((val%4)) -eq 0 ]
-c1=$?
-
-[ $((val%100)) -eq 0 ]
-c2=$?
-
-[ $((val%400)) -eq 0 ]
-c3=$?
-
-
-if [ $c1 -eq 0 ] && [ $c2 -eq 1 ] || [ $c3 -eq 0 ]
-then
-	echo "true"
-	exit 0
-fi
+while [ "$n" -ne "1" ]
+do
+	sp=$((n%2))
+	if [ $sp -eq 0 ]
+	then
+		n=$((n/2))
+	else
+		n=$((3*n+1))
+	fi
+	step=$((step + 1))
+done
 
 
-echo "false"
+echo $step
 exit 0
-
-
