@@ -32,7 +32,7 @@ l1=`echo "( $a + $b ) > $c" | bc `
 l2=`echo "( $b + $c ) > $a" | bc `
 l3=`echo "( $a + $c ) > $b" | bc `
 
-#echo $l1 $l2 $l3
+
 
 if [ "$(( l1 + l2 + l3 ))" -ne "3" ]
 then
@@ -46,19 +46,18 @@ l2=`echo "$b == $a" | bc `
 l3=`echo "$c == $b" | bc `
 
 
-
 if [ "$cmd" == "equilateral" ]
 then 
-	if [ "$l1" -eq "1" ] && ["$l2" -eq "1" ] && [ "$l3"  -eq "1" ]
+	if [ "$l1" -eq "1" ] && [ "$l2" -eq "1" ] && [ "$l3"  -eq "1" ]
 	then
-        echo "true"
+        	echo "true"
 	else
-        echo "false"
+        	echo "false"
 	fi
-
 elif [ "$cmd" == "isosceles" ]
 then
-	if [ "$l1" -eq "1" ] || ["$l2" -eq "1" ] || [ "$l3"  -eq "1" ]
+	
+	if [ "$l1" -eq "1" ] || [ "$l2" -eq "1" ] || [ "$l3"  -eq "1" ]
 	then
 		echo "true"
 	else

@@ -22,9 +22,3 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
-old=`date  --utc --date="$1" '+%s'`
-now=$((old + 1000000000))
-#echo $old
-#echo $now
-date --utc --date="@$now" '+%Y-%m-%dT%H:%M:%S'
-exit 0

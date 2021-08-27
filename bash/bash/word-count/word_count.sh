@@ -22,9 +22,17 @@
 #   main "$@"
 #
 # *** PLEASE REMOVE THESE COMMENTS BEFORE SUBMITTING YOUR SOLUTION ***
-old=`date  --utc --date="$1" '+%s'`
-now=$((old + 1000000000))
-#echo $old
-#echo $now
-date --utc --date="@$now" '+%Y-%m-%dT%H:%M:%S'
-exit 0
+inp=`echo -en "$1" | tr '&' ' ' | tr '@' ' ' | tr '$' ' ' | tr '%' ' ' | tr '^' ' ' | tr '&' ' ' |  tr $'\n' ' ' | tr '\n' ' ' | tr '.' ' ' | tr ',' ' ' | tr '*' ' ' | tr ':' ' ' | tr '!' ' ' | tr '?' ' ' | tr '"' ' ' | tr A-Z a-z`
+for word in $inp
+do
+	end=`echo -n $word | tail -c1`
+	sta=`echo -n $word | head -c1`
+	if [ "$end" == "'" ] && [ "$sta" == "'" ]
+	then
+		echo ${word:1:-1}
+	else
+		echo $word
+	fi
+
+done | sort | uniq -c | sed 's/      //' | awk '{ printf  $2": " $1"\n" }'
+ 
